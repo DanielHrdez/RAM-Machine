@@ -18,4 +18,8 @@ public class OutputUnit {
     }
     outputTape[writingHead++] = value;
   }
+
+  public int[] getOutputTape() {
+    return outputTape;
+  }
 }
