@@ -1,13 +1,13 @@
-package ramMachine.components.io;
+package ram.components.io;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class writeOutFile {
+public class WriteOutFile {
   private File outputFile;
 
-  public writeOutFile(String path) {
+  public WriteOutFile(String path) {
     outputFile = new File(path);
     try {
       if (!outputFile.exists()) {

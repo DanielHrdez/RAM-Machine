@@ -1,13 +1,13 @@
-package ramMachine.components.io;
+package ram.components.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class readInFile {
+public class ReadInFile {
   private Scanner input;
 
-  public readInFile(String fileName) {
+  public ReadInFile(String fileName) {
     try {
       input = new Scanner(new File(fileName));
     } catch (FileNotFoundException e) {
