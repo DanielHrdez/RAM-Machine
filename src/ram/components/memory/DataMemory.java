@@ -7,19 +7,31 @@ public class DataMemory {
     registers[0] = 0;
   }
 
-  public void store(int address, int value) {
-    if (address >= registers.length) {
-      int[] newRegisters = new int[address + 1];
-      System.arraycopy(registers, 0, newRegisters, 0, registers.length);
-      registers = newRegisters;
-    }
-    registers[address] = value;
+  public void load(int value) {
+    registers[0] = value;
   }
 
-  public int load(int address) {
-    if (address >= registers.length) {
-      return 0;
-    }
-    return registers[address];
+  public void store(int address) {
+    registers[address] = registers[0];
+  }
+
+  public int getAcc() {
+    return this.registers[0];
+  }
+
+  public void setReg(int address, int value) {
+    this.registers[address] = value;
+  }
+
+  public int getReg(int address) {
+    return this.registers[address];
+  }
+
+  public void add(int value) {
+    this.registers[0] += value;
+  }
+
+  public void mul(int value) {
+    this.registers[0] *= value;
   }
 }

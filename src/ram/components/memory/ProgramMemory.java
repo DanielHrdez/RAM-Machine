@@ -12,4 +12,13 @@ public class ProgramMemory {
   public Instruction getInstruction() {
     return instructions[programCounter++];
   }
+
+  public void setPC(String tag) {
+    for (int i = 0; i < this.instructions.length; i++) {
+      if (this.instructions[i].getTag().equals(tag)) {
+        this.programCounter = i;
+        break;
+      }
+    }
+  }
 }
