@@ -4,13 +4,13 @@ import ram.components.Instruction;
 import ram.components.io.ReadRamFile;
 
 public class ProgramMemory {
-  private Instruction[] instructions = new Instruction[1024];
+  private Instruction[] instructions;
 
   public ProgramMemory(String path) {
-    ReadRamFile readRamFile = new ReadRamFile(path);
-    this.instructions = new Instruction[readRamFile.size()];
-    for (int i = 0; readRamFile.getInstruction() != null; ++i) {
-      instructions[i] = readRamFile.getInstruction();
+    ReadRamFile RamFile = new ReadRamFile(path);
+    this.instructions = new Instruction[RamFile.size()];
+    for (int i = 0; i < this.instructions.length; ++i) {
+      instructions[i] = RamFile.getInstruction();
     }
   }
 
