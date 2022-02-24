@@ -9,15 +9,15 @@ public class ReadInFile {
 
   public ReadInFile(String fileName) {
     try {
-      input = new Scanner(new File(fileName));
+      this.input = new Scanner(new File(fileName));
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
     }
   }
 
   public String read() {
-    if (input.hasNext()) {
-      return input.next();
+    if (this.input.hasNext()) {
+      return this.input.next();
     } else {
       return null;
     }

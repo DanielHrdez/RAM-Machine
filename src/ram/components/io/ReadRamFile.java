@@ -4,24 +4,35 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import ram.components.Instruction;
+
 public class ReadRamFile {
   private Scanner input;
 
   public ReadRamFile(String fileName) {
     try {
-      input = new Scanner(new File(fileName));
+      this.input = new Scanner(new File(fileName));
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
     }
   }
 
-  public String readLine() {
-    if (input.hasNextLine()) {
-      if (input.nextLine().startsWith("#") || input.nextLine().length() == 0) {
+  private String readLine() {
+    if (this.input.hasNextLine()) {
+      if (this.input.nextLine().startsWith("#") || this.input.nextLine().length() == 0) {
         return readLine();
       } else {
-        return input.nextLine();
+        return this.input.nextLine();
       }
+    } else {
+      return null;
+    }
+  }
+
+  public Instruction getInstruction() {
+    String line = readLine();
+    if (line != null) {
+      return new Instruction(line);
     } else {
       return null;
     }

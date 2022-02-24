@@ -8,13 +8,13 @@ public class WriteOutFile {
   private File outputFile;
 
   public WriteOutFile(String path) {
-    outputFile = new File(path);
+    this.outputFile = new File(path);
     try {
-      if (!outputFile.exists()) {
-        outputFile.createNewFile();
+      if (!this.outputFile.exists()) {
+        this.outputFile.createNewFile();
       } else {
-        outputFile.delete();
-        outputFile.createNewFile();
+        this.outputFile.delete();
+        this.outputFile.createNewFile();
       }
     } catch (IOException e) {
       System.out.println("Error occurred while creating file");
@@ -23,7 +23,7 @@ public class WriteOutFile {
 
   public void write(char data) {
     try {
-      PrintWriter outputWriter = new PrintWriter(outputFile);
+      PrintWriter outputWriter = new PrintWriter(this.outputFile);
       outputWriter.print(data);
       outputWriter.close();
     } catch (IOException e) {
