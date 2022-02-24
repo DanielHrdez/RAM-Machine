@@ -15,6 +15,9 @@ public class writeOutFile {
     try {
       if (!outputFile.exists()) {
         outputFile.createNewFile();
+      } else {
+        outputFile.delete();
+        outputFile.createNewFile();
       }
       PrintWriter output = new PrintWriter(outputFile);
       output.println(data);
