@@ -9,9 +9,6 @@ public class writeOutFile {
 
   public writeOutFile(String path) {
     outputFile = new File(path);
-  }
-
-  public void write(String data) {
     try {
       if (!outputFile.exists()) {
         outputFile.createNewFile();
@@ -19,11 +16,18 @@ public class writeOutFile {
         outputFile.delete();
         outputFile.createNewFile();
       }
-      PrintWriter output = new PrintWriter(outputFile);
-      output.println(data);
-      output.close();
     } catch (IOException e) {
-      System.out.println("File not found");
+      System.out.println("Error occurred while creating file");
+    }
+  }
+
+  public void write(String data) {
+    try {
+      PrintWriter outputWriter = new PrintWriter(outputFile);
+      outputWriter.print(data);
+      outputWriter.close();
+    } catch (IOException e) {
+      System.out.println("Error occurred while writing to file");
     }
   }
 }

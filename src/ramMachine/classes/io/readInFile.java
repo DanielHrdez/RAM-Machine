@@ -16,10 +16,10 @@ public class readInFile {
   }
 
   public String read() {
-    String fileString = "";
-    while (input.hasNextLine()) {
-      fileString += input.nextLine();
+    if (input.hasNext()) {
+      return input.next();
+    } else {
+      return null;
     }
-    return fileString;
   }
 }
