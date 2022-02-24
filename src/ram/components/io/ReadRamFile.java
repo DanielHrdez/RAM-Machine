@@ -17,6 +17,25 @@ public class ReadRamFile {
     }
   }
 
+  public Instruction getInstruction() {
+    String line = readLine();
+    if (line != null) {
+      return new Instruction(line);
+    } else {
+      return null;
+    }
+  }
+
+  public int size() {
+    int size = 0;
+    Scanner aux = this.input;
+    while (readLine() != null) {
+      ++size;
+    }
+    this.input = aux;
+    return size;
+  }
+
   private String readLine() {
     if (this.input.hasNextLine()) {
       if (this.input.nextLine().startsWith("#") || this.input.nextLine().length() == 0) {
@@ -24,15 +43,6 @@ public class ReadRamFile {
       } else {
         return this.input.nextLine();
       }
-    } else {
-      return null;
-    }
-  }
-
-  public Instruction getInstruction() {
-    String line = readLine();
-    if (line != null) {
-      return new Instruction(line);
     } else {
       return null;
     }
