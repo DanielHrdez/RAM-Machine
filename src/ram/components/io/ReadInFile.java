@@ -5,21 +5,25 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ReadInFile {
-  private Scanner input;
+  private int[] inputTape = new int[1024];
 
   public ReadInFile(String fileName) {
     try {
-      this.input = new Scanner(new File(fileName));
+      Scanner input = new Scanner(new File(fileName));
+      for (int i = 0; input.hasNext(); ++i) {
+        if (i >= this.inputTape.length) {
+          int[] newInputTape = new int[this.inputTape.length * 2];
+          System.arraycopy(inputTape, 0, newInputTape, 0, this.inputTape.length);
+          this.inputTape = newInputTape;
+        }
+        this.inputTape[i] = input.nextInt();
+      }
     } catch (FileNotFoundException e) {
       System.out.println("File not found");
     }
   }
 
-  public String read() {
-    if (this.input.hasNext()) {
-      return this.input.next();
-    } else {
-      return null;
-    }
+  public int[] getInputTape() {
+    return inputTape;
   }
 }

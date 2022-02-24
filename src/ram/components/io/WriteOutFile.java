@@ -5,26 +5,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WriteOutFile {
-  private File outputFile;
-
-  public WriteOutFile(String path) {
-    this.outputFile = new File(path);
+  public WriteOutFile(String path, int[] outputTape) {
+    File outputFile = new File(path);
     try {
-      if (!this.outputFile.exists()) {
-        this.outputFile.createNewFile();
+      if (!outputFile.exists()) {
+        outputFile.createNewFile();
       } else {
-        this.outputFile.delete();
-        this.outputFile.createNewFile();
+        outputFile.delete();
+        outputFile.createNewFile();
       }
     } catch (IOException e) {
       System.out.println("Error occurred while creating file");
     }
-  }
-
-  public void write(char data) {
     try {
-      PrintWriter outputWriter = new PrintWriter(this.outputFile);
-      outputWriter.print(data);
+      PrintWriter outputWriter = new PrintWriter(outputFile);
+      for (int i = 0; i < outputTape.length; ++i) {
+        outputWriter.println(outputTape[i]);
+      }
       outputWriter.close();
     } catch (IOException e) {
       System.out.println("Error occurred while writing to file");

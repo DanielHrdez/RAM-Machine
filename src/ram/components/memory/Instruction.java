@@ -1,4 +1,4 @@
-package ram.components;
+package ram.components.memory;
 
 public class Instruction {
   private String tag;

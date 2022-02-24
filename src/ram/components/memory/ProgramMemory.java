@@ -1,6 +1,5 @@
 package ram.components.memory;
 
-import ram.components.Instruction;
 import ram.components.io.ReadRamFile;
 
 public class ProgramMemory {
