@@ -21,7 +21,7 @@ public class writeOutFile {
     }
   }
 
-  public void write(String data) {
+  public void write(char data) {
     try {
       PrintWriter outputWriter = new PrintWriter(outputFile);
       outputWriter.print(data);
