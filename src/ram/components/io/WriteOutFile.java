@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WriteOutFile {
-  public WriteOutFile(String path, int[] outputTape) {
-    File outputFile = new File(path);
+  private File outputFile;
+
+  public WriteOutFile(String path) {
     try {
+      File outputFile = new File(path);
       if (!outputFile.exists()) {
         outputFile.createNewFile();
       } else {
@@ -17,6 +19,9 @@ public class WriteOutFile {
     } catch (IOException e) {
       System.out.println("Error occurred while creating file");
     }
+  }
+
+  public void write(int[] outputTape) {
     try {
       PrintWriter outputWriter = new PrintWriter(outputFile);
       for (int i = 0; i < outputTape.length; ++i) {
