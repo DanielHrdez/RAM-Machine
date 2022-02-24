@@ -1,4 +1,4 @@
-package ramMachine.classes.io;
+package ramMachine.components.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
