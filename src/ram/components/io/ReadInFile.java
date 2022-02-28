@@ -10,13 +10,14 @@ public class ReadInFile {
   public ReadInFile(String fileName) {
     try {
       Scanner input = new Scanner(new File(fileName));
-      for (int i = 0; input.hasNext(); ++i) {
-        if (i >= this.inputTape.length) {
+      String allTape = input.nextLine();
+      for (int i = 0; i < allTape.length(); ++i) {
+        if (i >= inputTape.length) {
           int[] newInputTape = new int[this.inputTape.length * 2];
           System.arraycopy(inputTape, 0, newInputTape, 0, this.inputTape.length);
           this.inputTape = newInputTape;
         }
-        this.inputTape[i] = input.nextInt();
+        inputTape[i] = allTape.charAt(i) - '0';
       }
     } catch (FileNotFoundException e) {
       System.out.println("File not found");

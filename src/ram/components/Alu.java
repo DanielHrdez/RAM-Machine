@@ -26,14 +26,15 @@ public class Alu {
       String opcode = instruction.getOpcode().toUpperCase();
       String operandAux = instruction.getOperand();
       int operand = 0;
-      int op_int = Integer.parseInt(operandAux.substring(1));
       if (operandAux.startsWith("=")) {
-        operand = op_int;
+        operand = Integer.parseInt(operandAux.substring(1));
       } else if (operandAux.startsWith("*")) {
-        operand = this.dataMemory.getReg(this.dataMemory.getReg(op_int));
-      } else {
-        operand = this.dataMemory.getReg(Integer.parseInt(operandAux));
-      }
+        operand = this.dataMemory.getReg(
+            this.dataMemory.getReg(Integer.parseInt(operandAux.substring(1)))
+        );
+      } else if (isNumeric(operandAux)) {
+        operand = Integer.parseInt(operandAux);
+      } else tag = operandAux.concat(":");
       switch (opcode) {
         case "LOAD":
           this.dataMemory.load(operand);
@@ -87,4 +88,15 @@ public class Alu {
   public int[] getOutputTape() {
     return this.outputUnit.getOutputTape();
   }
+  
+  boolean isNumeric(String str) {
+    try {
+      double d = Double.parseDouble(str);
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+    return true;
+  }
 }
+
+

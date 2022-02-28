@@ -6,6 +6,8 @@ public class Instruction {
   private String operand;
 
   public Instruction(String instruction) {
+    instruction = instruction.replaceAll("^\\s+", "");
+    instruction = instruction.replaceAll("\\t", " ");
     String[] tokens = instruction.split(" ");
     switch (tokens.length) {
       case 3:
@@ -15,8 +17,8 @@ public class Instruction {
         break;
       case 2:
         this.tag = "";
-        this.opcode = tokens[0];
         this.operand = tokens[1];
+        this.opcode = tokens[0];
         break;
       default:
         this.tag = "";

@@ -1,7 +1,7 @@
 package ram.components.memory;
 
 public class DataMemory {
-  private int[] registers = new int[1];
+  private int[] registers = new int[1024];
 
   public DataMemory() {
     registers[0] = 0;
