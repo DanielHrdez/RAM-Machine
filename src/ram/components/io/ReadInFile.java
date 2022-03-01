@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ReadInFile {
-  private int[] inputTape = new int[1024];
+  private int[] inputTape = new int[1];
 
   public ReadInFile(String fileName) {
     try {
@@ -13,7 +13,7 @@ public class ReadInFile {
       String allTape = input.nextLine();
       for (int i = 0; i < allTape.length(); ++i) {
         if (i >= inputTape.length) {
-          int[] newInputTape = new int[this.inputTape.length * 2];
+          int[] newInputTape = new int[this.inputTape.length + 1];
           System.arraycopy(inputTape, 0, newInputTape, 0, this.inputTape.length);
           this.inputTape = newInputTape;
         }

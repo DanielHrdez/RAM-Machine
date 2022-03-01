@@ -1,7 +1,7 @@
 package ram.components.memory;
 
 public class DataMemory {
-  private int[] registers = new int[1024];
+  private int[] registers = new int[1];
 
   public DataMemory() {
     registers[0] = 0;
@@ -12,6 +12,11 @@ public class DataMemory {
   }
 
   public void store(int address) {
+    if (address >= registers.length) {
+      int[] newRegisters = new int[address + 1];
+      System.arraycopy(registers, 0, newRegisters, 0, registers.length);
+      registers = newRegisters;
+    }
     registers[address] = registers[0];
   }
 
@@ -20,10 +25,20 @@ public class DataMemory {
   }
 
   public void setReg(int address, int value) {
+    if (address >= registers.length) {
+      int[] newRegisters = new int[address + 1];
+      System.arraycopy(registers, 0, newRegisters, 0, registers.length);
+      registers = newRegisters;
+    }
     this.registers[address] = value;
   }
 
   public int getReg(int address) {
+    if (address >= registers.length) {
+      int[] newRegisters = new int[address + 1];
+      System.arraycopy(registers, 0, newRegisters, 0, registers.length);
+      registers = newRegisters;
+    }
     return this.registers[address];
   }
 

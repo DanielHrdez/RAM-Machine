@@ -18,10 +18,10 @@ public class ReadRamFile {
   }
 
   public Instruction[] getInstructions() {
-    Instruction[] instructions = new Instruction[1024];
+    Instruction[] instructions = new Instruction[1];
     for (int i = 0; input.hasNextLine(); ++i) {
       if (i >= instructions.length) {
-        Instruction[] newInstructions = new Instruction[instructions.length * 2];
+        Instruction[] newInstructions = new Instruction[instructions.length + 1];
         System.arraycopy(instructions, 0, newInstructions, 0, instructions.length);
         instructions = newInstructions;
       }

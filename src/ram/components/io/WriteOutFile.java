@@ -9,12 +9,12 @@ public class WriteOutFile {
 
   public WriteOutFile(String path) {
     try {
-      File outputFile = new File(path);
-      if (!outputFile.exists()) {
-        outputFile.createNewFile();
+      this.outputFile = new File(path);
+      if (!this.outputFile.exists()) {
+        this.outputFile.createNewFile();
       } else {
-        outputFile.delete();
-        outputFile.createNewFile();
+        this.outputFile.delete();
+        this.outputFile.createNewFile();
       }
     } catch (IOException e) {
       System.out.println("Error occurred while creating file");
@@ -23,7 +23,7 @@ public class WriteOutFile {
 
   public void write(int[] outputTape) {
     try {
-      PrintWriter outputWriter = new PrintWriter(outputFile);
+      PrintWriter outputWriter = new PrintWriter(this.outputFile);
       for (int i = 0; i < outputTape.length; ++i) {
         outputWriter.println(outputTape[i]);
       }

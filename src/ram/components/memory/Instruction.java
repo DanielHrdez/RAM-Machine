@@ -16,9 +16,16 @@ public class Instruction {
         this.operand = tokens[2];
         break;
       case 2:
-        this.tag = "";
-        this.operand = tokens[1];
-        this.opcode = tokens[0];
+        // if the first token ends with ':', its the tag
+        if (tokens[0].endsWith(":")) {
+          this.tag = tokens[0];
+          this.opcode = tokens[1];
+          this.operand = "";
+        } else {
+          this.tag = "";
+          this.opcode = tokens[0];
+          this.operand = tokens[1];
+        }
         break;
       default:
         this.tag = "";
