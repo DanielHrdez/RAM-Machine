@@ -25,3 +25,6 @@ hs_err_pid*
 # input tape and output tape files
 *.in
 *.out
+
+# vscode files
+.vscode/

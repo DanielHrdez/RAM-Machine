@@ -32,11 +32,10 @@ public class ReadRamFile {
 
   private Instruction getInstruction() {
     String line = this.readLine();
-    if (line != null) {
-      return new Instruction(line);
-    } else {
-      return null;
+    if (line.trim().length() == 0) {
+      return this.getInstruction();
     }
+    return new Instruction(line);
   }
 
   private String readLine() {

@@ -33,10 +33,15 @@ public class Alu {
             this.dataMemory.getReg(Integer.parseInt(operandAux.substring(1)))
         );
       } else if (isNumeric(operandAux)) {
-        if (opcode.equals("READ") || opcode.equals("WRITE")) {
-          operand = Integer.parseInt(operandAux);
-        } else {
-          operand = this.dataMemory.getReg(Integer.parseInt(operandAux));
+        switch (opcode) {
+          case "READ":
+          case "WRITE":
+          case "STORE":
+            operand = Integer.parseInt(operandAux);
+            break;
+          default:
+            operand = this.dataMemory.getReg(Integer.parseInt(operandAux));
+            break;
         }
       } else tag = operandAux.concat(":");
       switch (opcode) {

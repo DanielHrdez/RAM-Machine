@@ -6,7 +6,8 @@ public class Instruction {
   private String operand;
 
   public Instruction(String instruction) {
-    instruction = instruction.replaceAll("^\\s+", "");
+    // replace all whitespace with a single space
+    instruction = instruction.replaceAll("\\s+", " ");
     instruction = instruction.replaceAll("\\t", " ");
     String[] tokens = instruction.split(" ");
     switch (tokens.length) {
