@@ -44,7 +44,8 @@ public class Alu {
           this.dataMemory.load(operand);
           break;
         case "STORE":
-          this.dataMemory.store(operand);
+          if (!operandAux.startsWith("=")) this.dataMemory.store(operand);
+          else throw new Error("STORE cannot have an =operand");
           break;
         case "ADD":
           this.dataMemory.add(operand);
@@ -61,12 +62,12 @@ public class Alu {
         case "READ":
           if (operand != 0) {
             this.dataMemory.setReg(operand, this.inputUnit.read());
-          }
+          } else throw new Error("READ cannot store to R0");
           break;
         case "WRITE":
           if (operand != 0) {
             this.outputUnit.write(this.dataMemory.getReg(operand));
-          }
+          } else throw new Error("WRITE cannot store from R0");
           break;
         case "JUMP":
           this.programMemory.setPC(tag);

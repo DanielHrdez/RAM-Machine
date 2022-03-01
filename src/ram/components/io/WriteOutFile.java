@@ -25,7 +25,7 @@ public class WriteOutFile {
     try {
       PrintWriter outputWriter = new PrintWriter(this.outputFile);
       for (int i = 0; i < outputTape.length; ++i) {
-        outputWriter.println(outputTape[i]);
+        outputWriter.print(outputTape[i]);
       }
       outputWriter.close();
     } catch (IOException e) {
