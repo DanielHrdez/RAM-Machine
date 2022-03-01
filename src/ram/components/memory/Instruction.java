@@ -6,34 +6,13 @@ public class Instruction {
   private String operand;
 
   public Instruction(String instruction) {
-    // replace all whitespace with a single space
     instruction = instruction.replaceAll("\\s+", " ");
     instruction = instruction.replaceAll("\\t", " ");
     String[] tokens = instruction.split(" ");
-    switch (tokens.length) {
-      case 3:
-        this.tag = tokens[0];
-        this.opcode = tokens[1];
-        this.operand = tokens[2];
-        break;
-      case 2:
-        // if the first token ends with ':', its the tag
-        if (tokens[0].endsWith(":")) {
-          this.tag = tokens[0];
-          this.opcode = tokens[1];
-          this.operand = "";
-        } else {
-          this.tag = "";
-          this.opcode = tokens[0];
-          this.operand = tokens[1];
-        }
-        break;
-      default:
-        this.tag = "";
-        this.opcode = "";
-        this.operand = "";
-        break;
-    }
+    this.tag = tokens[0];
+    this.opcode = tokens[1];
+    if (tokens.length > 2) this.operand = tokens[2];
+    else this.operand = "";
   }
 
   public String getTag() {

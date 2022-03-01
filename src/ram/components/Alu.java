@@ -70,7 +70,7 @@ public class Alu {
           } else throw new Error("READ cannot store to R0");
           break;
         case "WRITE":
-          if (operand != 0) {
+          if (operand != 0 || operandAux.startsWith("=")) {
             this.outputUnit.write(this.dataMemory.getReg(operand));
           } else throw new Error("WRITE cannot store from R0");
           break;
