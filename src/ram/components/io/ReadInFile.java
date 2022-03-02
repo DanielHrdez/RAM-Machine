@@ -1,3 +1,17 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Diseño y Análisis de Algoritmos
+ * 
+ * @author Daniel Hdez de León
+ * 
+ * @version 1.0.0
+ * 
+ * @see ReadInFile
+ * Clase que reconoce un archivo de entrada.
+ */
+
 package ram.components.io;
 
 import java.io.File;
@@ -7,6 +21,12 @@ import java.util.Scanner;
 public class ReadInFile {
   private int[] inputTape = new int[1];
 
+  /**
+   * Constructor de la clase ReadInFile.
+   * 
+   * @param fileName
+   *          Nombre del archivo de entrada.
+   */
   public ReadInFile(String fileName) {
     try {
       Scanner input = new Scanner(new File(fileName));
@@ -24,6 +44,11 @@ public class ReadInFile {
     }
   }
 
+  /**
+   * Método que devuelve la cinta de entrada.
+   * 
+   * @return Cinta de entrada.
+   */
   public int[] getInputTape() {
     return inputTape;
   }

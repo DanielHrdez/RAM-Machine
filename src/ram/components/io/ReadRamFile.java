@@ -1,3 +1,17 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Diseño y Análisis de Algoritmos
+ * 
+ * @author Daniel Hdez de León
+ * 
+ * @version 1.0.0
+ * 
+ * @see ReadRamFile
+ * Clase que reconoce un archivo de código RAM.
+ */
+
 package ram.components.io;
 
 import java.io.File;
@@ -10,6 +24,12 @@ import ram.components.memory.Opcode;
 public class ReadRamFile {
   private Scanner input;
 
+  /**
+   * Constructor de la clase ReadRamFile.
+   * 
+   * @param fileName
+   *          Nombre del archivo de entrada.
+   */
   public ReadRamFile(String fileName) {
     try {
       this.input = new Scanner(new File(fileName));
@@ -18,6 +38,11 @@ public class ReadRamFile {
     }
   }
 
+  /**
+   * Método que devuelve las instrucciones leídas del archivo.
+   * 
+   * @return Instructiones leídas del archivo.
+   */
   public Instruction[] getInstructions() {
     Instruction[] instructions = new Instruction[1];
     for (int i = 0; input.hasNextLine(); ++i) {
@@ -26,15 +51,21 @@ public class ReadRamFile {
         System.arraycopy(instructions, 0, newInstructions, 0, instructions.length);
         instructions = newInstructions;
       }
-      instructions[i] = this.getInstruction(i);
+      instructions[i] = this.getInstruction();
     }
     return instructions;
   }
 
-  private Instruction getInstruction(int numInstruction) {
+  /**
+   * Método que devuelve una instrucción leída del archivo.
+   * Ignora los espacios en blanco y tabuladores.
+   * 
+   * @return Instrucción leída del archivo.
+   */
+  private Instruction getInstruction() {
     String instruction = this.readLine();
     if (instruction.trim().length() == 0) {
-      return this.getInstruction(numInstruction);
+      return this.getInstruction();
     }
     instruction = instruction.replaceAll("\\s+", " ");
     instruction = instruction.replaceAll("\\t", " ");
@@ -48,6 +79,12 @@ public class ReadRamFile {
     return new Instruction(tokens[0], Opcode.valueOf(tokens[1].toUpperCase()), tokens[2]);
   }
 
+  /**
+   * Método que lee una línea del archivo.
+   * Ignora comentarios y líneas vacías.
+   * 
+   * @return Línea leída del archivo.
+   */
   private String readLine() {
     if (this.input.hasNextLine()) {
       String nextLine = this.input.nextLine();

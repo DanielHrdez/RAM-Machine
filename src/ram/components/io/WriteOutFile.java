@@ -1,3 +1,17 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Diseño y Análisis de Algoritmos
+ * 
+ * @author Daniel Hdez de León
+ * 
+ * @version 1.0.0
+ * 
+ * @see WriteOutFile
+ * Clase que escribe en un fichero de salida.
+ */
+
 package ram.components.io;
 
 import java.io.File;
@@ -7,6 +21,12 @@ import java.io.PrintWriter;
 public class WriteOutFile {
   private File outputFile;
 
+  /**
+   * Constructor de la clase WriteOutFile.
+   * 
+   * @param path
+   *          Ruta del fichero de salida.
+   */
   public WriteOutFile(String path) {
     try {
       this.outputFile = new File(path);
@@ -21,6 +41,12 @@ public class WriteOutFile {
     }
   }
 
+  /**
+   * Método que escribe en el fichero de salida.
+   * 
+   * @param outputTape
+   *          Cinta de salida.
+   */
   public void write(int[] outputTape) {
     try {
       PrintWriter outputWriter = new PrintWriter(this.outputFile);
