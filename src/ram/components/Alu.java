@@ -23,69 +23,120 @@ public class Alu {
   public void run() {
     while (true) {
       Instruction instruction = programMemory.getInstruction();
-      String tag = instruction.getTag();
       Opcode opcode = instruction.getOpcode();
-      String operandAux = instruction.getOperand();
-      int operand = 0;
-      if (operandAux.startsWith("=")) {
-        operand = Integer.parseInt(operandAux.substring(1));
-      } else if (operandAux.startsWith("*")) {
-        operand = this.dataMemory.getReg(
-            this.dataMemory.getReg(Integer.parseInt(operandAux.substring(1)))
-        );
-      } else if (isNumeric(operandAux)) {
-        switch (opcode) {
-          case READ:
-          case WRITE:
-          case STORE:
-            operand = Integer.parseInt(operandAux);
-            break;
-          default:
-            operand = this.dataMemory.getReg(Integer.parseInt(operandAux));
-            break;
-        }
-      } else tag = operandAux.concat(":");
+      String operand = instruction.getOperand();
+      int value;
       switch (opcode) {
         case LOAD:
-          this.dataMemory.load(operand);
+          if (operand.startsWith("=")) {
+            value = Integer.parseInt(operand.substring(1));
+            this.dataMemory.load(value);
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.load(this.dataMemory.getReg(value));
+          } else {
+            value = this.dataMemory.getReg(Integer.parseInt(operand));
+            this.dataMemory.load(value);
+          }
           break;
         case STORE:
-          if (!operandAux.startsWith("=")) this.dataMemory.store(operand);
-          else throw new Error("STORE cannot have an =operand");
+          if (operand.startsWith("=")) {
+            throw new Error("STORE cannot have an =operand");
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.store(value);
+          } else {
+            value = Integer.parseInt(operand);
+            this.dataMemory.store(value);
+          }
           break;
         case ADD:
-          this.dataMemory.add(operand);
+          if (operand.startsWith("=")) {
+            value = Integer.parseInt(operand.substring(1));
+            this.dataMemory.add(value);
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.add(this.dataMemory.getReg(value));
+          } else {
+            value = this.dataMemory.getReg(Integer.parseInt(operand));
+            this.dataMemory.add(value);
+          }
           break;
         case SUB:
-          this.dataMemory.add(-operand);
+          if (operand.startsWith("=")) {
+            value = Integer.parseInt(operand.substring(1));
+            this.dataMemory.add(-value);
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.add(-this.dataMemory.getReg(value));
+          } else {
+            value = this.dataMemory.getReg(Integer.parseInt(operand));
+            this.dataMemory.add(-value);
+          }
           break;
         case MUL:
-          this.dataMemory.mul(operand);
+          if (operand.startsWith("=")) {
+            value = Integer.parseInt(operand.substring(1));
+            this.dataMemory.mul(value);
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.mul(this.dataMemory.getReg(value));
+          } else {
+            value = this.dataMemory.getReg(Integer.parseInt(operand));
+            this.dataMemory.mul(value);
+          }
           break;
         case DIV:
-          this.dataMemory.mul(1 / operand);
+          if (operand.startsWith("=")) {
+            value = Integer.parseInt(operand.substring(1));
+            this.dataMemory.mul(1 / value);
+          } else if (operand.startsWith("*")) {
+            value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+            this.dataMemory.mul(1 / this.dataMemory.getReg(value));
+          } else {
+            value = this.dataMemory.getReg(Integer.parseInt(operand));
+            this.dataMemory.mul(1 / value);
+          }
           break;
         case READ:
-          if (operand != 0) {
-            this.dataMemory.setReg(operand, this.inputUnit.read());
+          if (operand != "0") {
+            if (operand.startsWith("=")) {
+              value = Integer.parseInt(operand.substring(1));
+              this.dataMemory.setReg(value, this.inputUnit.read());
+            } else if (operand.startsWith("*")) {
+              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+              this.dataMemory.setReg(value, this.inputUnit.read());
+            } else {
+              value = Integer.parseInt(operand);
+              this.dataMemory.setReg(value, this.inputUnit.read());
+            }
           } else throw new Error("READ cannot store to R0");
           break;
         case WRITE:
-          if (operand != 0 || operandAux.startsWith("=")) {
-            this.outputUnit.write(this.dataMemory.getReg(operand));
+          if (!operand.equals("0")) {
+            if (operand.startsWith("=")) {
+              value = Integer.parseInt(operand.substring(1));
+              this.outputUnit.write(value);
+            } else if (operand.startsWith("*")) {
+              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
+              this.outputUnit.write(this.dataMemory.getReg(value));
+            } else {
+              value = this.dataMemory.getReg(Integer.parseInt(operand));
+              this.outputUnit.write(value);
+            }
           } else throw new Error("WRITE cannot store from R0");
           break;
         case JUMP:
-          this.programMemory.setPC(tag);
+          this.programMemory.setPC(operand.concat(":"));
           break;
         case JZERO:
           if (this.dataMemory.getAcc() == 0) {
-            this.programMemory.setPC(tag);
+            this.programMemory.setPC(operand.concat(":"));
           }
           break;
         case JGTZ:
           if (this.dataMemory.getAcc() > 0) {
-            this.programMemory.setPC(tag);
+            this.programMemory.setPC(operand.concat(":"));
           }
           break;
         case HALT:
@@ -98,15 +149,6 @@ public class Alu {
 
   public int[] getOutputTape() {
     return this.outputUnit.getOutputTape();
-  }
-  
-  boolean isNumeric(String str) {
-    try {
-      Double.parseDouble(str);
-    } catch (NumberFormatException nfe) {
-      return false;
-    }
-    return true;
   }
 }
 

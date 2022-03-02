@@ -9,7 +9,7 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "./src/test/test1.ram ./input_tape.in output_tape.out"
+            "args": "./src/test/test6.ram ./input_tape.in output_tape.out"
         },
         {
             "type": "java",

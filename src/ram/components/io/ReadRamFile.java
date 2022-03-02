@@ -45,7 +45,7 @@ public class ReadRamFile {
       newTokens[2] = "";
       tokens = newTokens;
     }
-    return new Instruction(tokens[0], this.getOpcode(tokens[1]), tokens[2]);
+    return new Instruction(tokens[0], Opcode.valueOf(tokens[1].toUpperCase()), tokens[2]);
   }
 
   private String readLine() {
@@ -58,37 +58,6 @@ public class ReadRamFile {
       }
     } else {
       return null;
-    }
-  }
-
-  private Opcode getOpcode(String opcode) {
-    switch (opcode) {
-      case "LOAD":
-        return Opcode.LOAD;
-      case "STORE":
-        return Opcode.STORE;
-      case "ADD":
-        return Opcode.ADD;
-      case "SUB":
-        return Opcode.SUB;
-      case "MUL":
-        return Opcode.MUL;
-      case "DIV":
-        return Opcode.DIV;
-      case "READ":
-        return Opcode.READ;
-      case "WRITE":
-        return Opcode.WRITE;
-      case "JUMP":
-        return Opcode.JUMP;
-      case "JZERO":
-        return Opcode.JZERO;
-      case "JGTZ":
-        return Opcode.JGTZ;
-      case "HALT":
-        return Opcode.HALT;
-      default:
-        return null;
     }
   }
 }
