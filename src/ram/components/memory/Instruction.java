@@ -2,24 +2,20 @@ package ram.components.memory;
 
 public class Instruction {
   private String tag;
-  private String opcode;
+  private Opcode opcode;
   private String operand;
 
-  public Instruction(String instruction) {
-    instruction = instruction.replaceAll("\\s+", " ");
-    instruction = instruction.replaceAll("\\t", " ");
-    String[] tokens = instruction.split(" ");
-    this.tag = tokens[0];
-    this.opcode = tokens[1];
-    if (tokens.length > 2) this.operand = tokens[2];
-    else this.operand = "";
+  public Instruction(String tag, Opcode opcode, String operand) {
+    this.tag = tag;
+    this.opcode = opcode;
+    this.operand = operand;
   }
 
   public String getTag() {
     return this.tag;
   }
 
-  public String getOpcode() {
+  public Opcode getOpcode() {
     return this.opcode;
   }
 

@@ -3,6 +3,7 @@ package ram.components;
 import ram.components.memory.DataMemory;
 import ram.components.memory.ProgramMemory;
 import ram.components.memory.Instruction;
+import ram.components.memory.Opcode;
 import ram.components.io.InputUnit;
 import ram.components.io.OutputUnit;
 
@@ -23,7 +24,7 @@ public class Alu {
     while (true) {
       Instruction instruction = programMemory.getInstruction();
       String tag = instruction.getTag();
-      String opcode = instruction.getOpcode().toUpperCase();
+      Opcode opcode = instruction.getOpcode();
       String operandAux = instruction.getOperand();
       int operand = 0;
       if (operandAux.startsWith("=")) {
@@ -34,9 +35,9 @@ public class Alu {
         );
       } else if (isNumeric(operandAux)) {
         switch (opcode) {
-          case "READ":
-          case "WRITE":
-          case "STORE":
+          case READ:
+          case WRITE:
+          case STORE:
             operand = Integer.parseInt(operandAux);
             break;
           default:
@@ -45,49 +46,49 @@ public class Alu {
         }
       } else tag = operandAux.concat(":");
       switch (opcode) {
-        case "LOAD":
+        case LOAD:
           this.dataMemory.load(operand);
           break;
-        case "STORE":
+        case STORE:
           if (!operandAux.startsWith("=")) this.dataMemory.store(operand);
           else throw new Error("STORE cannot have an =operand");
           break;
-        case "ADD":
+        case ADD:
           this.dataMemory.add(operand);
           break;
-        case "SUB":
+        case SUB:
           this.dataMemory.add(-operand);
           break;
-        case "MUL":
+        case MUL:
           this.dataMemory.mul(operand);
           break;
-        case "DIV":
+        case DIV:
           this.dataMemory.mul(1 / operand);
           break;
-        case "READ":
+        case READ:
           if (operand != 0) {
             this.dataMemory.setReg(operand, this.inputUnit.read());
           } else throw new Error("READ cannot store to R0");
           break;
-        case "WRITE":
+        case WRITE:
           if (operand != 0 || operandAux.startsWith("=")) {
             this.outputUnit.write(this.dataMemory.getReg(operand));
           } else throw new Error("WRITE cannot store from R0");
           break;
-        case "JUMP":
+        case JUMP:
           this.programMemory.setPC(tag);
           break;
-        case "JZERO":
+        case JZERO:
           if (this.dataMemory.getAcc() == 0) {
             this.programMemory.setPC(tag);
           }
           break;
-        case "JGTZ":
+        case JGTZ:
           if (this.dataMemory.getAcc() > 0) {
             this.programMemory.setPC(tag);
           }
           break;
-        case "HALT":
+        case HALT:
           return;
         default:
           return;

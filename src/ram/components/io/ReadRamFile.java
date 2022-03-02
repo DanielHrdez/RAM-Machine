@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import ram.components.memory.Instruction;
+import ram.components.memory.Opcode;
 
 public class ReadRamFile {
   private Scanner input;
@@ -25,17 +26,26 @@ public class ReadRamFile {
         System.arraycopy(instructions, 0, newInstructions, 0, instructions.length);
         instructions = newInstructions;
       }
-      instructions[i] = this.getInstruction();
+      instructions[i] = this.getInstruction(i);
     }
     return instructions;
   }
 
-  private Instruction getInstruction() {
-    String line = this.readLine();
-    if (line.trim().length() == 0) {
-      return this.getInstruction();
+  private Instruction getInstruction(int numInstruction) {
+    String instruction = this.readLine();
+    if (instruction.trim().length() == 0) {
+      return this.getInstruction(numInstruction);
     }
-    return new Instruction(line);
+    instruction = instruction.replaceAll("\\s+", " ");
+    instruction = instruction.replaceAll("\\t", " ");
+    String[] tokens = instruction.split(" ");
+    if (tokens.length < 3) {
+      String[] newTokens = new String[3];
+      System.arraycopy(tokens, 0, newTokens, 0, tokens.length);
+      newTokens[2] = "";
+      tokens = newTokens;
+    }
+    return new Instruction(tokens[0], this.getOpcode(tokens[1]), tokens[2]);
   }
 
   private String readLine() {
@@ -48,6 +58,37 @@ public class ReadRamFile {
       }
     } else {
       return null;
+    }
+  }
+
+  private Opcode getOpcode(String opcode) {
+    switch (opcode) {
+      case "LOAD":
+        return Opcode.LOAD;
+      case "STORE":
+        return Opcode.STORE;
+      case "ADD":
+        return Opcode.ADD;
+      case "SUB":
+        return Opcode.SUB;
+      case "MUL":
+        return Opcode.MUL;
+      case "DIV":
+        return Opcode.DIV;
+      case "READ":
+        return Opcode.READ;
+      case "WRITE":
+        return Opcode.WRITE;
+      case "JUMP":
+        return Opcode.JUMP;
+      case "JZERO":
+        return Opcode.JZERO;
+      case "JGTZ":
+        return Opcode.JGTZ;
+      case "HALT":
+        return Opcode.HALT;
+      default:
+        return null;
     }
   }
 }

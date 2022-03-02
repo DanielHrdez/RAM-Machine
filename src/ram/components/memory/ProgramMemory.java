@@ -14,10 +14,10 @@ public class ProgramMemory {
   }
 
   public void setPC(String tag) {
-    for (int i = 0; i < this.instructions.length; i++) {
+    for (int i = 0; i < this.instructions.length; ++i) {
       if (this.instructions[i].getTag().equals(tag)) {
         this.programCounter = i;
-        break;
+        return;
       }
     }
   }
