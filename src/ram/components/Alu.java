@@ -1,3 +1,17 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Diseño y Análisis de Algoritmos
+ * 
+ * @author Daniel Hdez de León
+ * 
+ * @version 1.0.0
+ * 
+ * @see Alu
+ * Clase que escribe en un fichero de salida.
+ */
+
 package ram.components;
 
 import ram.components.memory.DataMemory;
