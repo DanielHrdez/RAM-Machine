@@ -44,13 +44,11 @@ public class ReadRamFile {
    * @return Instructiones leídas del archivo.
    */
   public Instruction[] getInstructions() {
-    Instruction[] instructions = new Instruction[1];
+    Instruction[] instructions = new Instruction[0];
     for (int i = 0; input.hasNextLine(); ++i) {
-      if (i >= instructions.length) {
-        Instruction[] newInstructions = new Instruction[instructions.length + 1];
-        System.arraycopy(instructions, 0, newInstructions, 0, instructions.length);
-        instructions = newInstructions;
-      }
+      Instruction[] newInstructions = new Instruction[instructions.length + 1];
+      System.arraycopy(instructions, 0, newInstructions, 0, instructions.length);
+      instructions = newInstructions;
       instructions[i] = this.getInstruction();
     }
     return instructions;
