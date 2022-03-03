@@ -9,7 +9,7 @@
  * @version 1.0.0
  * 
  * @see Alu
- * Clase que escribe en un fichero de salida.
+ * Clase que representa una ALU.
  */
 
 package ram.components;
@@ -27,6 +27,14 @@ public class Alu {
   private InputUnit inputUnit;
   private OutputUnit outputUnit;
 
+  /**
+   * Constructor de la clase Alu.
+   * 
+   * @param instructions
+   *         Array de instrucciones que representa la memoria de programa.
+   * @param inputTape
+   *        Array de bits que representa la cinta de entrada.
+   */
   public Alu(Instruction[] instructions, int[] inputTape) {
     this.dataMemory = new DataMemory();
     this.programMemory = new ProgramMemory(instructions);
@@ -34,6 +42,9 @@ public class Alu {
     this.outputUnit = new OutputUnit();
   }
 
+  /**
+   * Método que ejecuta la ALU.
+   */
   public void run() {
     while (true) {
       Instruction instruction = programMemory.getInstruction();
@@ -161,6 +172,10 @@ public class Alu {
     }
   }
 
+  /**
+   * Método que devuelve el valor de la cinta de salida.
+   * @return Cinta de salida.
+   */
   public int[] getOutputTape() {
     return this.outputUnit.getOutputTape();
   }

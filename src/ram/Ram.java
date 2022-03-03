@@ -9,7 +9,7 @@
  * @version 1.0.0
  * 
  * @see Ram
- * Clase que escribe en un fichero de salida.
+ * Clase que representa la memoria RAM.
  */
 
 package ram;
@@ -21,7 +21,7 @@ import ram.components.io.ReadRamFile;
 import ram.components.memory.Instruction;
 
 public class Ram {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
     // Read in the input file and create the InputTape
     ReadInFile readInFile = new ReadInFile(args[1]);
     int[] inputTape = readInFile.getInputTape();
