@@ -21,7 +21,10 @@ import ram.components.io.ReadRamFile;
 import ram.components.memory.Instruction;
 
 public class Ram {
-    public static void main(String[] args) {
+  public static void main(String[] args) {
+    // Checkea el debug mode
+    int debugMode = Integer.parseInt(args[3]);
+
     // Read in the input file and create the InputTape
     ReadInFile readInFile = new ReadInFile(args[1]);
     int[] inputTape = readInFile.getInputTape();
@@ -32,7 +35,7 @@ public class Ram {
 
     // Create the Alu and run the Alu
     Alu alu = new Alu(instructions, inputTape);
-    alu.run();
+    alu.run(debugMode);
 
     // Write the output file
     WriteOutFile writeOutFile = new WriteOutFile(args[2]);

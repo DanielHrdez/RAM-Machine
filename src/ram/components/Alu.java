@@ -45,7 +45,8 @@ public class Alu {
   /**
    * Método que ejecuta la ALU.
    */
-  public void run() {
+  public void run(int debugMode) {
+    int instExecuted = 0;
     while (true) {
       Instruction instruction = programMemory.getInstruction();
       Opcode opcode = instruction.getOpcode();
@@ -165,10 +166,13 @@ public class Alu {
           }
           break;
         case HALT:
-          return;
         default:
+          if (debugMode == 1) {
+            System.out.println("Instrucciones ejecutadas: " + instExecuted);
+          }
           return;
       }
+      instExecuted++;
     }
   }
 
