@@ -31,7 +31,7 @@ public class DataMemory {
    *         Valor que se carga en el registro 0.
    */
   public void load(int value) {
-    registers[0].setValue(value);
+    this.registers[0].setValue(value);
   }
 
   /**
@@ -44,7 +44,7 @@ public class DataMemory {
    */
   public void store(int address) {
     if (address >= this.registers.length) this.increase(address);
-    registers[address] = registers[0];
+    this.registers[address].setValue(this.registers[0].getValue());
   }
 
   /**
@@ -57,7 +57,7 @@ public class DataMemory {
    */
   public void store(int address, int pos) {
     if (address >= this.registers.length) this.increase(address);
-    registers[address].putAt(pos, registers[0].getValue());
+    this.registers[address].putAt(pos, this.registers[0].getValue());
   }
 
   /**
@@ -92,7 +92,7 @@ public class DataMemory {
    */
   public void setReg(int address, int value, int pos) {
     if (address >= this.registers.length) this.increase(address);
-    registers[address].putAt(pos, value);
+    this.registers[address].putAt(pos, value);
   }
 
   /**
@@ -137,9 +137,8 @@ public class DataMemory {
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("Registers: ");
-    for (int i = 0; i < registers.length; i++) {
-      sb.append(registers[i]);
+    for (int i = 0; i < this.registers.length; i++) {
+      sb.append(this.registers[i].toString());
       sb.append(" ");
     }
     return sb.toString();

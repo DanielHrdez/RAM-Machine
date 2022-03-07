@@ -23,4 +23,13 @@ public class Register {
     public void putAt(int index, int value) {
         this.values[index] = value;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.values.length; i++) {
+            sb.append(this.values[i]);
+            if (i < this.values.length - 1) sb.append(", ");
+        }
+        return sb.toString();
+    }
 }

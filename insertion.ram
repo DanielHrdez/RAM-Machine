@@ -1,0 +1,15 @@
+# Programa para la ejecucion de 
+# un algoritmo de ordenaacion por insercion
+
+      LOAD =0
+      STORE 2
+
+lee:  READ 0
+      JZERO sort
+      STORE R1[R2]
+      LOAD 2
+      ADD 1
+      STORE 2
+      JUMP lee
+
+sort: HALT

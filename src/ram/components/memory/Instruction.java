@@ -68,6 +68,6 @@ public class Instruction {
    * @return Representación en String de la instrucción.
    */
   public String toString() {
-    return "Instruccion: " + this.tag + " " + this.opcode.toString() + " " + this.operand;
+    return this.tag + " " + this.opcode.toString() + " " + this.operand;
   }
 }
