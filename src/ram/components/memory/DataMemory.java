@@ -15,13 +15,13 @@
 package ram.components.memory;
 
 public class DataMemory {
-  private int[] registers = new int[1];
+  private Register[] registers = new Register[1];
 
   /**
    * Constructor de la clase DataMemory.
    */
   public DataMemory() {
-    registers[0] = 0;
+    registers[0].setValue(0);
   }
 
   /**
@@ -31,7 +31,7 @@ public class DataMemory {
    *         Valor que se carga en el registro 0.
    */
   public void load(int value) {
-    registers[0] = value;
+    registers[0].setValue(value);
   }
 
   /**
@@ -44,7 +44,7 @@ public class DataMemory {
    */
   public void store(int address) {
     if (address >= registers.length) {
-      int[] newRegisters = new int[address + 1];
+      Register[] newRegisters = new Register[address + 1];
       System.arraycopy(registers, 0, newRegisters, 0, registers.length);
       registers = newRegisters;
     }
