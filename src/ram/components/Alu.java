@@ -54,9 +54,9 @@ public class Alu {
       Instruction instruction = programMemory.getInstruction();
       Opcode opcode = instruction.getOpcode();
       String operand = instruction.getOperand();
-      int value;
+      int value = 0, reg = 0;
       if (debugMode == 2) {
-        System.out.println("Instruccion ejecutada: " + instruction.toString());
+        System.out.println("Instruccion a ejecutar: " + instruction.toString());
         System.out.println("Memoria de datos: " + dataMemory.toString());
         System.out.println("Cinta de entrada: " + inputUnit.toString());
         System.out.println("Cinta de salida: " + outputUnit.toString());
@@ -75,14 +75,13 @@ public class Alu {
         case LOAD:
           if (operand.startsWith("=")) {
             value = Integer.parseInt(operand.substring(1));
-            this.dataMemory.load(value);
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-            this.dataMemory.load(this.dataMemory.getReg(value));
+            value = this.dataMemory.getReg(value);
           } else {
             value = this.dataMemory.getReg(Integer.parseInt(operand));
-            this.dataMemory.load(value);
           }
+          this.dataMemory.load(value);
           break;
         case STORE:
           if (operand.startsWith("=")) {
@@ -90,6 +89,14 @@ public class Alu {
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
             this.dataMemory.store(value);
+          } else if (operand.matches("R[0-9]+\\[.+\\]")) {
+            reg = Integer.parseInt(operand.substring(1, operand.indexOf('[')));
+            if (operand.matches("R[0-9]+\\[R[0-9]+\\]")) {
+              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1)));
+            } else if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
+              value = Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1));
+            }
+            this.dataMemory.store(reg, value);
           } else {
             value = Integer.parseInt(operand);
             this.dataMemory.store(value);
@@ -98,77 +105,70 @@ public class Alu {
         case ADD:
           if (operand.startsWith("=")) {
             value = Integer.parseInt(operand.substring(1));
-            this.dataMemory.add(value);
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-            this.dataMemory.add(this.dataMemory.getReg(value));
+            value = this.dataMemory.getReg(value);
           } else {
             value = this.dataMemory.getReg(Integer.parseInt(operand));
-            this.dataMemory.add(value);
           }
+          this.dataMemory.add(value);
           break;
         case SUB:
           if (operand.startsWith("=")) {
             value = Integer.parseInt(operand.substring(1));
-            this.dataMemory.add(-value);
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-            this.dataMemory.add(-this.dataMemory.getReg(value));
+            value = -this.dataMemory.getReg(value);
           } else {
             value = this.dataMemory.getReg(Integer.parseInt(operand));
-            this.dataMemory.add(-value);
           }
+          this.dataMemory.add(-value);
           break;
         case MUL:
           if (operand.startsWith("=")) {
             value = Integer.parseInt(operand.substring(1));
-            this.dataMemory.mul(value);
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-            this.dataMemory.mul(this.dataMemory.getReg(value));
+            value = this.dataMemory.getReg(value);
           } else {
             value = this.dataMemory.getReg(Integer.parseInt(operand));
-            this.dataMemory.mul(value);
           }
+          this.dataMemory.mul(value);
           break;
         case DIV:
           if (operand.startsWith("=")) {
             value = Integer.parseInt(operand.substring(1));
-            this.dataMemory.mul(1 / value);
           } else if (operand.startsWith("*")) {
             value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-            this.dataMemory.mul(1 / this.dataMemory.getReg(value));
+            value = 1 / this.dataMemory.getReg(value);
           } else {
             value = this.dataMemory.getReg(Integer.parseInt(operand));
-            this.dataMemory.mul(1 / value);
           }
+          this.dataMemory.mul(1 / value);
           break;
         case READ:
           if (operand != "0") {
             if (operand.startsWith("=")) {
               value = Integer.parseInt(operand.substring(1));
-              this.dataMemory.setReg(value, this.inputUnit.read());
             } else if (operand.startsWith("*")) {
               value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-              this.dataMemory.setReg(value, this.inputUnit.read());
             } else {
               value = Integer.parseInt(operand);
-              this.dataMemory.setReg(value, this.inputUnit.read());
             }
+            this.dataMemory.setReg(value, this.inputUnit.read());
           } else throw new Error("READ cannot store to R0");
           break;
         case WRITE:
           if (!operand.equals("0")) {
             if (operand.startsWith("=")) {
               value = Integer.parseInt(operand.substring(1));
-              this.outputUnit.write(value);
             } else if (operand.startsWith("*")) {
               value = this.dataMemory.getReg(Integer.parseInt(operand.substring(1)));
-              this.outputUnit.write(this.dataMemory.getReg(value));
+              value = this.dataMemory.getReg(value);
             } else {
               value = this.dataMemory.getReg(Integer.parseInt(operand));
-              this.outputUnit.write(value);
             }
+            this.outputUnit.write(value);
           } else throw new Error("WRITE cannot store from R0");
           break;
         case JUMP:
