@@ -41,4 +41,21 @@ public class InputUnit {
     }
     return inputTape[readingHead++];
   }
+
+  /**
+   * Método que devuelve una string con el contenido de la cinta de entrada.
+   * 
+   * @return String con el contenido de la cinta de entrada.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < inputTape.length; i++) {
+      sb.append(inputTape[i]);
+      if (i == readingHead) {
+        sb.append("*");
+      }
+      sb.append(" ");
+    }
+    return sb.toString();
+  }
 }

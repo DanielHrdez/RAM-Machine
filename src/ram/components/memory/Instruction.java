@@ -61,4 +61,13 @@ public class Instruction {
   public String getOperand() {
     return this.operand;
   }
+
+  /**
+   * Método que devuelve una representación en String de la instrucción.
+   * 
+   * @return Representación en String de la instrucción.
+   */
+  public String toString() {
+    return "Instruccion: " + this.tag + " " + this.opcode.toString() + " " + this.operand;
+  }
 }

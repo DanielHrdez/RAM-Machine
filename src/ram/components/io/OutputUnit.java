@@ -48,4 +48,22 @@ public class OutputUnit {
   public int[] getOutputTape() {
     return this.outputTape;
   }
+
+  /**
+   * Método que devuelve una string con la cinta de salida.
+   * 
+   * @return String con la cinta de salida.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    if (this.outputTape.length == 0) sb.append("*");
+    else for (int i = 0; i < this.outputTape.length; i++) {
+      sb.append(this.outputTape[i]);
+      if (i == this.writingHead -1) {
+        sb.append("*");
+      }
+      sb.append(" ");
+    }
+    return sb.toString();
+  }
 }

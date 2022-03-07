@@ -115,4 +115,19 @@ public class DataMemory {
   public void mul(int value) {
     this.registers[0] *= value;
   }
+
+  /**
+   * Método que devuelve los valores de los registros.
+   * 
+   * @return String de los valores de los registros.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Registers: ");
+    for (int i = 0; i < registers.length; i++) {
+      sb.append(registers[i]);
+      sb.append(" ");
+    }
+    return sb.toString();
+  }
 }
