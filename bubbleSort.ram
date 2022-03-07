@@ -1,0 +1,62 @@
+# Programa para la ejecucion de 
+# un algoritmo de ordenacion por bubblesort
+
+            LOAD =0
+            STORE 2
+
+# Leemos el vector y los almacenamos en R1, su tamaño en R2
+lee:        READ 0
+            JZERO sort
+            STORE R1[R2]
+            LOAD 2
+            ADD 1
+            STORE 2
+            JUMP lee
+
+# Inicializamos los dos bucles for, i está en R3, key en R4 e i en R5
+sort:       LOAD =1
+            STORE 3
+for:        SUB 2
+            JZERO end
+            LOAD R1[R3]
+            STORE 4
+            LOAD 3
+            SUB =1
+            STORE 5
+
+# Comprobamos el bucle while, en R6 tengo i + 1
+while:      JGTZ cond1
+            JUMP end-while
+cond1:      LOAD R1[R5]
+            SUB 4
+            JGTZ cond2
+            JUMP end-while
+cond2:      LOAD 5
+            ADD =1
+            STORE 6
+            LOAD R1[R5]
+            STORE R1[R6]
+            LOAD 5
+            SUB =1
+            STORE 5
+            JUMP while
+
+end-while:  LOAD 5
+            ADD 1
+            STORE 6
+            LOAD 4
+            STORE R1[R6]
+            LOAD 3
+            ADD 1
+            STORE 3
+            JUMP for
+
+# Escribimos en la cinta de salida
+end:        STORE 3
+            SUB 2
+            JZERO halt
+            WRITE R1[R3]
+            LOAD 3
+            ADD =1
+            JUMP end
+halt:       HALT

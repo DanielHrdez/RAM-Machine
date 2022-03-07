@@ -109,6 +109,19 @@ public class DataMemory {
   }
 
   /**
+   * Método que devuelve el valor del registro indicado.
+   * 
+   * @param address
+   *       Dirección del registro que se asgina el contenido.
+   * 
+   * @return Valor del registro indicado.
+   */
+  public int getReg(int address, int pos) {
+    if (address >= this.registers.length) this.increase(address);
+    return this.registers[address].getAt(pos);
+  }
+
+  /**
    * Método que sume el valor del registro 0 con el valor del indicado
    * y lo asigna al registro 0.
    * 
