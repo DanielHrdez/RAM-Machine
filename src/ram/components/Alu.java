@@ -44,6 +44,9 @@ public class Alu {
 
   /**
    * Método que ejecuta la ALU.
+   * 
+   * @param debugMode
+   *       Modo de depuración.
    */
   public void run(int debugMode) {
     int instExecuted = 0;
@@ -52,6 +55,22 @@ public class Alu {
       Opcode opcode = instruction.getOpcode();
       String operand = instruction.getOperand();
       int value;
+      if (debugMode == 2) {
+        System.out.println("Instruccion ejecutada: " + instruction.toString());
+        System.out.println("Memoria de datos: " + dataMemory.toString());
+        System.out.println("Cinta de entrada: " + inputUnit.toString());
+        System.out.println("Cinta de salida: " + outputUnit.toString());
+        System.out.println("Press enter to continue...");
+        try {
+          while(true) {
+            if (System.in.read() == '\n') {
+              break;
+            }
+          }
+        } catch (Exception e) {
+          System.out.println("Error reading input");
+        }
+      }
       switch (opcode) {
         case LOAD:
           if (operand.startsWith("=")) {
@@ -167,7 +186,7 @@ public class Alu {
           break;
         case HALT:
         default:
-          if (debugMode == 1) {
+          if (debugMode == 1 || debugMode == 2) {
             System.out.println("Instrucciones ejecutadas: " + instExecuted);
           }
           return;
