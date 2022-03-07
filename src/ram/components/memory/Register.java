@@ -1,31 +1,26 @@
 package ram.components.memory;
 
 public class Register {
-    int value = 0;
-    int[] registers = new int[1];
-    boolean isVector = false;
+    private int[] values;
 
-    public boolean isVector() {
-        return this.isVector;
-    }
-
-    public void setVector(boolean isVector) {
-        this.isVector = isVector;
+    public Register() {
+        this.values = new int[1];
+        this.values[0] = 0;
     }
 
     public int getValue() {
-        return this.value;
+        return this.values[0];
     }
 
     public void setValue(int value) {
-        this.value = value;
+        this.values[0] = value;
     }
 
     public int getAt(int index) {
-        return this.registers[index];
+        return this.values[index];
     }
 
     public void putAt(int index, int value) {
-        this.registers[index] = value;
+        this.values[index] = value;
     }
 }
