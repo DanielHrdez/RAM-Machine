@@ -4,12 +4,13 @@
             LOAD =0
             STORE 2
 
-# Leemos el vector y los almacenamos en R1, su tamaño n en R2
+# Leemos el vector y los almacenamos en R1, 
+# su tamaño n en R2
 lee:        READ 0
             JZERO sort
             STORE R1[R2]
             LOAD 2
-            ADD 1
+            ADD =1
             STORE 2
             JUMP lee
 

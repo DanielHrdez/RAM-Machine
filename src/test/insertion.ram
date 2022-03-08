@@ -4,16 +4,18 @@
             LOAD =0
             STORE 2
 
-# Leemos el vector y los almacenamos en R1, su tamaño en R2
+# Leemos el vector y los almacenamos en R1, 
+# su tamaño en R2
 lee:        READ 0
             JZERO sort
             STORE R1[R2]
             LOAD 2
-            ADD 1
+            ADD =1
             STORE 2
             JUMP lee
 
-# Inicializamos el bucle for, j está en R3, key en R4 e i en R5
+# Inicializamos el bucle for, j está en R3, 
+# key en R4 e i en R5
 sort:       LOAD =2
             STORE 3
 for:        SUB 2
@@ -24,7 +26,8 @@ for:        SUB 2
             SUB =1
             STORE 5
 
-# Comprobamos el bucle while, en R6 tengo i + 1
+# Comprobamos el bucle while, 
+# en R6 tengo i + 1
 while:      JGTZ cond1
             JUMP end-while
 cond1:      LOAD R1[R5]
