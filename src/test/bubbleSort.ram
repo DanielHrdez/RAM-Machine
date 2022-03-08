@@ -4,7 +4,7 @@
             LOAD =0
             STORE 2
 
-# Leemos el vector y los almacenamos en R1, su tamaño en R2
+# Leemos el vector y los almacenamos en R1, su tamaño n en R2
 lee:        READ 0
             JZERO sort
             STORE R1[R2]
@@ -13,43 +13,45 @@ lee:        READ 0
             STORE 2
             JUMP lee
 
-# Inicializamos los dos bucles for, i está en R3, key en R4 e i en R5
+# Inicializamos los dos bucles for, 
+# i está en R3, n-1 en R4
+# j se guarda en R5
 sort:       LOAD =1
             STORE 3
-for:        SUB 2
-            JZERO end
-            LOAD R1[R3]
-            STORE 4
-            LOAD 3
+for1:       LOAD 2
             SUB =1
+            STORE 4
+            SUB 3
+            JZERO end
+            LOAD 2
             STORE 5
-
-# Comprobamos el bucle while, en R6 tengo i + 1
-while:      JGTZ cond1
-            JUMP end-while
-cond1:      LOAD R1[R5]
-            SUB 4
-            JGTZ cond2
-            JUMP end-while
-cond2:      LOAD 5
+for2:       LOAD 3
             ADD =1
-            STORE 6
-            LOAD R1[R5]
-            STORE R1[R6]
+            SUB 5
+            JZERO endfor2
+
+# Comprobamos el bloque if, 
+# guardo A[j - 1] en R6
             LOAD 5
             SUB =1
-            STORE 5
-            JUMP while
-
-end-while:  LOAD 5
-            ADD 1
+            LOAD R1[R0]
             STORE 6
-            LOAD 4
+            LOAD R1[R5]
+            SUB 6
+            JGTZ endif
+if:         LOAD 6
             STORE R1[R6]
-            LOAD 3
-            ADD 1
+            LOAD 6
+            STORE R1[R5]
+endif:      LOAD 5
+            SUB =1
+            STORE 5
+            JUMP for2
+
+endfor2:    LOAD 3
+            ADD =1
             STORE 3
-            JUMP for
+            JUMP for1
 
 # Escribimos en la cinta de salida
 end:        STORE 3
