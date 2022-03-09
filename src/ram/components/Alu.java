@@ -62,11 +62,7 @@ public class Alu {
         System.out.println("Cinta de salida: " + outputUnit.toString());
         System.out.println("Press enter to continue...");
         try {
-          while(true) {
-            if (System.in.read() == '\n') {
-              break;
-            }
-          }
+          while(System.in.read() != '\n') {}
         } catch (Exception e) {
           System.out.println("Error reading input");
         }

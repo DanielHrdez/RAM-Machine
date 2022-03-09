@@ -17,31 +17,31 @@ lee:        READ 0
 # Inicializamos los dos bucles for, 
 # i está en R3, n-1 en R4
 # j se guarda en R5
-sort:       LOAD =1
+sort:       LOAD =0
             STORE 3
 for1:       LOAD 2
             SUB =1
             STORE 4
             SUB 3
             JZERO end
-            LOAD 2
+            LOAD 4
             STORE 5
-for2:       LOAD 3
-            ADD =1
-            SUB 5
+for2:       SUB 3
             JZERO endfor2
 
 # Comprobamos el bloque if, 
 # guardo A[j - 1] en R6
+# j - 1 en R7
             LOAD 5
             SUB =1
+            STORE 7
             LOAD R1[R0]
             STORE 6
             LOAD R1[R5]
             SUB 6
             JGTZ endif
-if:         LOAD 6
-            STORE R1[R6]
+            LOAD R1[R5]
+            STORE R1[R7]
             LOAD 6
             STORE R1[R5]
 endif:      LOAD 5
