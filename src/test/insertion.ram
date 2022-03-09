@@ -16,7 +16,7 @@ lee:        READ 0
 
 # Inicializamos el bucle for, j está en R3, 
 # key en R4 e i en R5
-sort:       LOAD =2
+sort:       LOAD =1
             STORE 3
 for:        SUB 2
             JZERO end
@@ -28,13 +28,14 @@ for:        SUB 2
 
 # Comprobamos el bucle while, 
 # en R6 tengo i + 1
-while:      JGTZ cond1
+while:      ADD =1
+            JGTZ cond
             JUMP end-while
-cond1:      LOAD R1[R5]
+cond:       LOAD R1[R5]
             SUB 4
-            JGTZ cond2
+            JGTZ do
             JUMP end-while
-cond2:      LOAD 5
+do:         LOAD 5
             ADD =1
             STORE 6
             LOAD R1[R5]
@@ -45,12 +46,12 @@ cond2:      LOAD 5
             JUMP while
 
 end-while:  LOAD 5
-            ADD 1
+            ADD =1
             STORE 6
             LOAD 4
             STORE R1[R6]
             LOAD 3
-            ADD 1
+            ADD =1
             STORE 3
             JUMP for
 
