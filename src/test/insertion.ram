@@ -8,7 +8,7 @@
 # su tamaño en R2
 lee:        READ 0
             JZERO sort
-            STORE R1[R2]
+            STORE R1[2]
             LOAD 2
             ADD =1
             STORE 2
@@ -20,7 +20,7 @@ sort:       LOAD =1
             STORE 3
 for:        SUB 2
             JZERO end
-            LOAD R1[R3]
+            LOAD R1[3]
             STORE 4
             LOAD 3
             SUB =1
@@ -31,15 +31,15 @@ for:        SUB 2
 while:      ADD =1
             JGTZ cond
             JUMP end-while
-cond:       LOAD R1[R5]
+cond:       LOAD R1[5]
             SUB 4
             JGTZ do
             JUMP end-while
 do:         LOAD 5
             ADD =1
             STORE 6
-            LOAD R1[R5]
-            STORE R1[R6]
+            LOAD R1[5]
+            STORE R1[6]
             LOAD 5
             SUB =1
             STORE 5
@@ -49,7 +49,7 @@ end-while:  LOAD 5
             ADD =1
             STORE 6
             LOAD 4
-            STORE R1[R6]
+            STORE R1[6]
             LOAD 3
             ADD =1
             STORE 3
@@ -59,7 +59,7 @@ end-while:  LOAD 5
 end:        STORE 3
             SUB 2
             JZERO halt
-            WRITE R1[R3]
+            WRITE R1[3]
             LOAD 3
             ADD =1
             JUMP end

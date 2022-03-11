@@ -76,10 +76,10 @@ public class Alu {
             value = this.dataMemory.getReg(value);
           } else if (operand.matches("R[0-9]+\\[.+\\]")) {
             reg = Integer.parseInt(operand.substring(1, operand.indexOf('[')));
-            if (operand.matches("R[0-9]+\\[R[0-9]+\\]")) {
-              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1)));
-            } else if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
-              value = Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1));
+            if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
+              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1)));
+            } else if (operand.matches("R[0-9]+\\[=[0-9]+\\]")) {
+              value = Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1));
             }
             value = this.dataMemory.getReg(reg, value);
           } else {
@@ -95,10 +95,10 @@ public class Alu {
             this.dataMemory.store(value);
           } else if (operand.matches("R[0-9]+\\[.+\\]")) {
             reg = Integer.parseInt(operand.substring(1, operand.indexOf('[')));
-            if (operand.matches("R[0-9]+\\[R[0-9]+\\]")) {
-              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1)));
-            } else if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
-              value = Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1));
+            if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
+              value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1)));
+            } else if (operand.matches("R[0-9]+\\[=[0-9]+\\]")) {
+              value = Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1));
             }
             this.dataMemory.store(reg, value);
           } else {
@@ -171,10 +171,10 @@ public class Alu {
               value = this.dataMemory.getReg(value);
             } else if (operand.matches("R[0-9]+\\[.+\\]")) {
               reg = Integer.parseInt(operand.substring(1, operand.indexOf('[')));
-              if (operand.matches("R[0-9]+\\[R[0-9]+\\]")) {
-                value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1)));
-              } else if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
-                value = Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1));
+              if (operand.matches("R[0-9]+\\[[0-9]+\\]")) {
+                value = this.dataMemory.getReg(Integer.parseInt(operand.substring(operand.indexOf('[') + 1, operand.length() - 1)));
+              } else if (operand.matches("R[0-9]+\\[=[0-9]+\\]")) {
+                value = Integer.parseInt(operand.substring(operand.indexOf('[') + 2, operand.length() - 1));
               }
               value = this.dataMemory.getReg(reg, value);
             } else {

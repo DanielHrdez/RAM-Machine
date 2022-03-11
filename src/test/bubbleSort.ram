@@ -8,7 +8,7 @@
 # su tamaño n en R2
 lee:        READ 0
             JZERO sort
-            STORE R1[R2]
+            STORE R1[2]
             LOAD 2
             ADD =1
             STORE 2
@@ -35,15 +35,15 @@ for2:       SUB 3
             LOAD 5
             SUB =1
             STORE 7
-            LOAD R1[R0]
+            LOAD R1[0]
             STORE 6
-            LOAD R1[R5]
+            LOAD R1[5]
             SUB 6
             JGTZ endif
-            LOAD R1[R5]
-            STORE R1[R7]
+            LOAD R1[5]
+            STORE R1[7]
             LOAD 6
-            STORE R1[R5]
+            STORE R1[5]
 endif:      LOAD 5
             SUB =1
             STORE 5
@@ -58,7 +58,7 @@ endfor2:    LOAD 3
 end:        STORE 3
             SUB 2
             JZERO halt
-            WRITE R1[R3]
+            WRITE R1[3]
             LOAD 3
             ADD =1
             JUMP end
