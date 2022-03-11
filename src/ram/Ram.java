@@ -23,7 +23,9 @@ import ram.components.memory.Instruction;
 public class Ram {
   public static void main(String[] args) {
     // Checkea el debug mode
-    int debugMode = Integer.parseInt(args[3]);
+    int debugMode;
+    if (args.length == 4) debugMode = Integer.parseInt(args[3]);
+    else debugMode = 0;
 
     // Read in the input file and create the InputTape
     ReadInFile readInFile = new ReadInFile(args[1]);
